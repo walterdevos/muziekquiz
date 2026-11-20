@@ -35,6 +35,11 @@ HOST_PIN=4321 npm start          # default PIN is 1234, default port 3000
 | `HOST_PIN`       | `1234`  | PIN required to unlock the host controls             |
 | `ITUNES_COUNTRY` | `NL`    | iTunes storefront used for search results            |
 
+Alternatively copy `.env.example` to `.env` and run `npm run start:env`, which
+loads the variables from that file (Node 20.6 or newer).
+
+Installing on an aaPanel server? See [docs/aapanel-install.md](docs/aapanel-install.md).
+
 ## Running behind a reverse proxy (recommended for the public URL)
 
 Use HTTPS on the public URL. Browsers then connect with `wss://`, and the

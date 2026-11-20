@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Muziekquiz</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <h1><span class="logo">♪</span> Muziekquiz</h1>
+      <div class="status">
+        <span id="sync-text">not connected</span>
+        <span id="conn-dot" class="dot"></span>
+      </div>
+    </header>
+
+    <main>
+      <!-- Join screen: the tap here unlocks audio playback in the browser -->
+      <section id="screen-join" class="card stage">
+        <p class="big-text">Ready to play?</p>
+        <p class="sub">Tap the button to join. Your browser needs one tap before it is allowed to play sound.</p>
+        <button id="btn-join" class="primary big">Join the quiz</button>
+      </section>
+
+      <!-- Live screen -->
+      <section id="screen-live" class="card stage hidden">
+        <div id="v-connecting" class="hidden">
+          <div class="spinner"></div>
+          <p class="big-text">Connecting…</p>
+        </div>
+        <div id="v-idle" class="hidden">
+          <p class="big-text">You're in!</p>
+          <p class="sub">Waiting for the quizmaster to start the next round.</p>
+        </div>
+        <div id="v-loading" class="hidden">
+          <div class="spinner"></div>
+          <p class="big-text">Loading the next clip…</p>
+        </div>
+        <div id="v-ready" class="hidden">
+          <p class="big-text">Get ready</p>
+          <p class="sub">The clip is loaded. It will start the moment the quizmaster says so.</p>
+        </div>
+        <div id="v-syncing" class="hidden">
+          <div class="spinner"></div>
+          <p class="big-text">Synchronising clocks…</p>
+        </div>
+        <div id="v-countdown" class="hidden">
+          <div id="countdown" class="countdown">5</div>
+          <p class="sub">Starting…</p>
+        </div>
+        <div id="v-playing" class="hidden">
+          <div class="bars"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <p class="big-text">Listen…</p>
+          <div class="progress"><div id="progress-bar"></div></div>
+        </div>
+        <div id="v-finished" class="hidden">
+          <p class="big-text">That was it!</p>
+          <p class="sub">Waiting for the quizmaster to reveal or start the next clip.</p>
+        </div>
+        <div id="v-error" class="hidden">
+          <p class="big-text">Hmm, that didn't work</p>
+          <p class="sub" id="error-message"></p>
+          <button id="btn-retry">Try again</button>
+        </div>
+        <div id="v-reveal" class="reveal hidden">
+          <img id="r-art" alt="">
+          <div>
+            <h2 id="r-title"></h2>
+            <p class="artist" id="r-artist"></p>
+            <p class="album" id="r-album"></p>
+            <a id="r-link" href="#" target="_blank" rel="noopener">Open in Apple Music</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="controls" class="card controls-bar hidden">
+        <div class="volume">
+          <span class="muted small">Volume</span>
+          <input id="volume" type="range" min="0" max="100" value="80">
+        </div>
+        <button id="btn-test">Test sound</button>
+      </section>
+    </main>
+
+    <footer>Music previews provided by the <a href="https://www.apple.com/itunes/" target="_blank" rel="noopener">iTunes Search API</a>. Clips are 30-second previews; the full tracks are available on Apple Music.</footer>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script type="module" src="/js/player.js"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Muziekquiz · Host</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <h1><span class="logo">♪</span> Muziekquiz <span class="muted small">host</span></h1>
+      <div class="status">
+        <span id="sync-text">not connected</span>
+        <span id="conn-dot" class="dot"></span>
+      </div>
+    </header>
+
+    <main>
+      <section id="pin-screen" class="card pin-form">
+        <p class="big-text">Quizmaster PIN</p>
+        <form id="pin-form">
+          <input id="pin" type="password" inputmode="numeric" autocomplete="off" placeholder="••••" autofocus>
+          <p id="pin-error" class="error-text small"></p>
+          <button class="primary" type="submit">Unlock host controls</button>
+        </form>
+      </section>
+
+      <div id="host-screen" class="hidden">
+        <div class="grid">
+          <!-- left: search -->
+          <section class="card">
+            <h2 style="margin:0 0 10px;font-size:1.05rem">Find a song</h2>
+            <input id="search" type="text" placeholder="Artist or title… (e.g. daft punk)" autocomplete="off">
+            <p id="search-status" class="muted small" style="margin:8px 0 0">Type at least two characters.</p>
+            <ul id="results" class="results"></ul>
+            <audio id="local-preview"></audio>
+          </section>
+
+          <!-- right: round control -->
+          <section class="card">
+            <div class="row" style="justify-content:space-between">
+              <h2 style="margin:0;font-size:1.05rem">Current round</h2>
+              <span id="phase" class="phase-pill" data-phase="idle">idle</span>
+            </div>
+
+            <div id="no-track" class="muted" style="margin-top:14px">No song selected. Search on the left and press <strong>Select</strong>.</div>
+            <div id="current" class="current hidden" style="margin-top:14px">
+              <img id="c-art" alt="">
+              <div>
+                <h3 id="c-title"></h3>
+                <div id="c-artist"></div>
+                <div id="c-album" class="muted small"></div>
+              </div>
+            </div>
+
+            <div class="stats">
+              <div class="stat"><div class="n" id="st-players">0</div><div class="l">players connected</div></div>
+              <div class="stat"><div class="n" id="st-ready">0</div><div class="l">clip loaded</div></div>
+              <div class="stat"><div class="n" id="st-timer">–</div><div class="l" id="st-timer-label">countdown</div></div>
+            </div>
+
+            <div class="host-controls">
+              <select id="countdown-select" title="Countdown length">
+                <option value="3000">3 s countdown</option>
+                <option value="5000" selected>5 s countdown</option>
+                <option value="7000">7 s countdown</option>
+                <option value="10000">10 s countdown</option>
+              </select>
+              <button id="btn-start" class="primary" disabled>▶ Start for everyone</button>
+              <button id="btn-stop" disabled>■ Stop</button>
+              <button id="btn-reveal" disabled>Reveal answer</button>
+              <button id="btn-reset" class="danger" disabled>Clear round</button>
+            </div>
+
+            <div class="row" style="margin-top:16px">
+              <label class="row small muted" style="gap:8px;cursor:pointer">
+                <input id="local-play" type="checkbox"> Also play the clip on this device, in sync
+              </label>
+            </div>
+            <div id="local-volume" class="volume hidden" style="margin-top:8px">
+              <span class="muted small">Volume</span>
+              <input id="volume" type="range" min="0" max="100" value="80">
+            </div>
+          </section>
+        </div>
+
+        <section class="card" style="margin-top:16px">
+          <div class="muted small">
+            Share this link with the players: <a id="player-link" href="/" target="_blank"></a>.
+            Players need to tap <em>Join</em> once so their browser is allowed to play sound.
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>Music previews provided by the <a href="https://www.apple.com/itunes/" target="_blank" rel="noopener">iTunes Search API</a>.</footer>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script type="module" src="/js/host.js"></script>
+</body>
+</html>
